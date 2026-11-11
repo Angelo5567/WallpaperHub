@@ -152,10 +152,52 @@ function openPreview(item){
   $("preview").hidden=false;
 }
 function closePreview(){$("preview").hidden=true;previewItem=null;}
-function downloadItem(item){
-  const link=document.createElement("a");
-  link.href=item.full||item.url;link.download=(item.title||"wallpaper").replace(/[^\w-]+/g,"-")+".jpg";
-  link.target="_blank";link.rel="noopener";document.body.append(link);link.click();link.remove();
+async function downloadItem(item){
+  const source = item.full || item.url;
+
+  if (!source) {
+    notify("Immagine non disponibile per il download.");
+    return;
+  }
+
+  try {
+    notify("Preparazione del download...");
+
+    const response = await fetch(source);
+
+    if (!response.ok) {
+      throw new Error("Impossibile scaricare l'immagine.");
+    }
+
+    const blob = await response.blob();
+    const mime = blob.type || response.headers.get("content-type") || "image/jpeg";
+
+    const extension = mime.includes("png") ? "png"
+      : mime.includes("webp") ? "webp"
+      : mime.includes("gif") ? "gif"
+      : mime.includes("avif") ? "avif"
+      : "jpg";
+
+    const filename = (item.title || "wallpaper")
+      .replace(/[^\w-]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "wallpaper";
+
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = objectUrl;
+    link.download = filename + "." + extension;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 30000);
+
+    notify("Download avviato!");
+  } catch (error) {
+    console.error("Errore download:", error);
+    notify("Download non riuscito. Riprova.");
+  }
 }
 async function uploadFiles(files){
   const selected=[...files].filter(f=>f.type.startsWith("image/"));
@@ -218,3 +260,4 @@ $("previewDownload").addEventListener("click",()=>previewItem&&downloadItem(prev
 document.querySelectorAll("[data-close]").forEach(el=>el.addEventListener("click",closePreview));
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePreview();});
 init();
+
