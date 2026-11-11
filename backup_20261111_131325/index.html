@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f5">
+  <meta name="description" content="WallpaperHub - La tua libreria personale di sfondi HD.">
+  <title>WallpaperHub</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" id="homeButton">
+      <span class="brand-icon">W</span>
+      <span>WallpaperHub</span>
+    </a>
+    <nav class="navigation">
+      <button class="nav-btn active" data-view="all">Esplora</button>
+      <button class="nav-btn" data-view="favorites">Preferiti</button>
+      <button class="nav-btn" data-view="uploads">I miei sfondi</button>
+    </nav>
+    <label class="upload-button">
+      <span>＋ Carica immagini</span>
+      <input type="file" id="uploadInput" accept="image/*" multiple hidden>
+    </label>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">LA TUA COLLEZIONE VISIVA</span>
+        <h1>Trova lo sfondo<br>che ti rappresenta.</h1>
+        <p>Esplora, salva e scarica immagini per personalizzare i tuoi dispositivi.</p>
+      </div>
+      <div class="hero-stat">
+        <strong id="totalCount">500</strong>
+        <span>sfondi disponibili</span>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="search-wrap">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="Cerca uno sfondo..." autocomplete="off">
+        <button id="clearSearch" aria-label="Cancella ricerca">×</button>
+      </div>
+      <select id="sortSelect" aria-label="Ordina sfondi">
+        <option value="default">Consigliati</option>
+        <option value="az">Nome A-Z</option>
+        <option value="za">Nome Z-A</option>
+      </select>
+      <select id="orientationSelect" aria-label="Orientamento">
+        <option value="all">Tutti i formati</option>
+        <option value="portrait">Verticale</option>
+        <option value="landscape">Orizzontale</option>
+        <option value="square">Quadrato</option>
+      </select>
+    </section>
+
+    <section class="category-section">
+      <div class="category-list" id="categoryList">
+        <button class="category active" data-category="Tutti">Tutti</button>
+        <button class="category" data-category="Natura">Natura</button>
+        <button class="category" data-category="Auto">Auto</button>
+        <button class="category" data-category="Tecnologia">Tecnologia</button>
+        <button class="category" data-category="Spazio">Spazio</button>
+        <button class="category" data-category="Minimal">Minimal</button>
+        <button class="category" data-category="Città">Città</button>
+      </div>
+    </section>
+
+    <section class="collection-tools">
+      <div>
+        <span class="section-label" id="viewTitle">TUTTI GLI SFONDI</span>
+        <p id="resultCount">Caricamento libreria...</p>
+      </div>
+      <div class="collection-actions">
+        <select id="collectionSelect" aria-label="Raccolta">
+          <option value="all">Tutte le raccolte</option>
+        </select>
+        <button class="secondary-button" id="newCollection">＋ Raccolta</button>
+      </div>
+    </section>
+
+    <section class="gallery" id="wallpaperGrid"></section>
+
+    <div class="empty-state" id="emptyState" hidden>
+      <div class="empty-icon">⌕</div>
+      <h2>Nessuno sfondo trovato</h2>
+      <p>Prova a cambiare la ricerca o i filtri.</p>
+      <button class="secondary-button" id="resetFilters">Azzera filtri</button>
+    </div>
+
+    <div class="load-more-wrap">
+      <button class="primary-button" id="loadMore">Mostra altri sfondi</button>
+    </div>
+  </main>
+
+  <footer>
+    <span>WallpaperHub</span>
+    <span>La tua libreria personale di sfondi.</span>
+  </footer>
+
+  <div class="modal" id="previewModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal" aria-label="Chiudi">×</button>
+      <div class="preview-image-wrap">
+        <img id="previewImage" alt="Anteprima sfondo">
+      </div>
+      <div class="preview-info">
+        <div>
+          <span class="section-label" id="previewCategory">SFONDO</span>
+          <h2 id="previewTitle">Titolo</h2>
+        </div>
+        <div class="preview-actions">
+          <select id="resolutionSelect" aria-label="Risoluzione download">
+            <option value="720">HD · 720 px</option>
+            <option value="1080" selected>Full HD · 1080 px</option>
+            <option value="1600">QHD · 1600 px</option>
+            <option value="2400">Ultra HD · 2400 px</option>
+          </select>
+          <button class="primary-button" id="downloadButton">Scarica</button>
+          <button class="secondary-button" id="previewFavorite">♡ Preferito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

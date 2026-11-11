@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090d">
+  <meta name="description" content="WallpaperHub - La tua collezione di sfondi in alta qualità">
+  <title>WallpaperHub</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">W</span>
+      <span>Wallpaper<span class="accent">Hub</span></span>
+    </a>
+    <nav>
+      <button class="nav-btn active" data-view="all">Esplora</button>
+      <button class="nav-btn" data-view="favorites">Preferiti</button>
+      <button class="nav-btn" data-view="uploads">I miei sfondi</button>
+    </nav>
+    <button class="upload-btn" id="uploadButton">＋ Carica sfondo</button>
+    <input type="file" id="fileInput" accept="image/*" multiple hidden>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">LA TUA PROSSIMA ISPIRAZIONE</span>
+        <h1>Il tuo schermo.<br><span>La tua identità.</span></h1>
+        <p>Scopri sfondi straordinari e personalizza ogni dispositivo.</p>
+        <a href="#gallery" class="hero-button">Esplora la collezione <span>→</span></a>
+      </div>
+      <div class="hero-glow"></div>
+    </section>
+
+    <section class="toolbar" id="gallery">
+      <div>
+        <span class="eyebrow">COLLEZIONE</span>
+        <h2 id="sectionTitle">Esplora gli sfondi</h2>
+      </div>
+      <label class="search-box">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="Cerca uno sfondo...">
+      </label>
+    </section>
+
+    <div class="categories" id="categories">
+      <button class="category active" data-category="Tutti">Tutti</button>
+      <button class="category" data-category="Natura">🌿 Natura</button>
+      <button class="category" data-category="Auto">🏎️ Auto</button>
+      <button class="category" data-category="Tecnologia">💻 Tecnologia</button>
+      <button class="category" data-category="Spazio">🌌 Spazio</button>
+      <button class="category" data-category="Minimal">◈ Minimal</button>
+      <button class="category" data-category="Città">🌃 Città</button>
+    </div>
+
+    <section class="gallery" id="wallpaperGrid"></section>
+    <div class="empty-state" id="emptyState" hidden>
+      <div>◌</div>
+      <h3>Nessuno sfondo trovato</h3>
+      <p>Prova a modificare la ricerca o la categoria.</p>
+    </div>
+  </main>
+
+  <footer>
+    <span class="brand"><span class="brand-icon">W</span> Wallpaper<span class="accent">Hub</span></span>
+    <span>La tua collezione, senza limiti.</span>
+  </footer>
+
+  <div class="modal" id="previewModal" aria-hidden="true">
+    <button class="modal-close" id="closeModal" aria-label="Chiudi">×</button>
+    <div class="preview-content">
+      <img id="previewImage" alt="Anteprima sfondo">
+      <div class="preview-info">
+        <div>
+          <h3 id="previewTitle"></h3>
+          <p id="previewCategory"></p>
+        </div>
+        <a id="downloadButton" class="download-btn" download>↓ Scarica sfondo</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

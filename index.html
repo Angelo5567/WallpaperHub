@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101114">
+<title>WallpaperHub</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-icon">W</span> WallpaperHub</a>
+  <div class="top-actions">
+    <span id="cloudStatus" class="status">Connessione cloud...</span>
+    <button id="uploadButton" class="button primary">＋ Carica sfondo</button>
+    <input id="fileInput" type="file" accept="image/*" multiple hidden>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <span class="eyebrow">LA TUA LIBRERIA VISIVA</span>
+      <h1>Trova il tuo<br><span>prossimo sfondo.</span></h1>
+      <p>Esplora, salva e organizza i tuoi sfondi preferiti.</p>
+    </div>
+    <div class="hero-count"><strong id="wallpaperCount">500</strong><span>SFONDI</span></div>
+  </section>
+
+  <section class="toolbar">
+    <input id="searchInput" class="search" type="search" placeholder="Cerca uno sfondo...">
+    <select id="categoryFilter">
+      <option value="all">Tutte le categorie</option>
+      <option value="nature">Natura</option>
+      <option value="architecture">Architettura</option>
+      <option value="abstract">Astratto</option>
+      <option value="animals">Animali</option>
+      <option value="space">Spazio</option>
+    </select>
+    <select id="sortFilter">
+      <option value="default">Ordine predefinito</option>
+      <option value="newest">Più recenti</option>
+      <option value="oldest">Più vecchi</option>
+    </select>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab active" data-view="all">Tutti gli sfondi</button>
+    <button class="tab" data-view="favorites">♥ Preferiti</button>
+    <button class="tab" data-view="collections">▤ Raccolte</button>
+    <button class="tab" data-view="uploads">↑ Caricati</button>
+  </nav>
+
+  <section id="collectionPanel" class="collection-panel" hidden>
+    <div class="collection-heading">
+      <h2>Le tue raccolte</h2>
+      <button id="newCollection" class="button primary">＋ Nuova raccolta</button>
+    </div>
+    <div id="collectionList" class="collection-list"></div>
+  </section>
+
+  <div id="activeCollection" class="active-collection" hidden>
+    <button id="backCollections" class="button">← Raccolte</button>
+    <h2 id="activeCollectionName"></h2>
+  </div>
+
+  <div id="gallery" class="gallery"></div>
+  <div id="emptyState" class="empty" hidden>
+    <h2>Nessuno sfondo trovato</h2>
+    <p>Prova a cambiare ricerca o categoria.</p>
+  </div>
+</main>
+
+<div id="preview" class="modal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="preview-box">
+    <button class="close" data-close>×</button>
+    <img id="previewImage" alt="Anteprima sfondo">
+    <div class="preview-footer">
+      <div><strong id="previewTitle"></strong><span id="previewDescription"></span></div>
+      <div class="preview-actions">
+        <button id="previewFavorite" class="button">♥ Preferito</button>
+        <button id="previewDownload" class="button primary">Scarica</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿{
+  "name": "WallpaperHub",
+  "short_name": "WallpaperHub",
+  "description": "La tua collezione personale di sfondi",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#09090d",
+  "theme_color": "#09090d",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

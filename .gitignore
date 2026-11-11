@@ -1,0 +1,6 @@
+﻿.env
+.env.*
+*.bak
+*.backup*
+*_backup_*
+node_modules/
